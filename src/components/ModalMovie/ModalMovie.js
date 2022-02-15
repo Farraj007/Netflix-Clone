@@ -9,7 +9,7 @@ function ModalMovie(props) {
         const userCaption = commentRef.current.value;
         ;
         const newData = { ...props.movie, userCaption };
-        props.addcomment(newData, props.movie.id);
+        props.addComment(newData, props.movie.id);
         console.log(props.movie)
     }
 
@@ -17,17 +17,17 @@ function ModalMovie(props) {
         <>
             <Modal show={props.show} onHide={() => { props.handleColse() }}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{props.movie.name}</Modal.Title>
+                    <Modal.Title>{props.movie.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <img width='100%' src={props.movie.image} alt={props.movie.name} />
-                    <p>{props.movie.topText ? props.movie.topText : "No Text Provided"}</p>
-                    <p>{props.movie.caption}</p>
+                    <img width='100%' src= {props.movie.poster_path} alt={props.movie.title} />
+                    {/* <p>{props.movie.isCaption ? props.movie.caption: "No Text Provided"}</p> */}
+                    {/* <p>{props.movie.caption}</p> */}
                 </Modal.Body>
                 <Modal.Footer>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>Captions:</Form.Label>
-                        <Form.Control ref={commentRef} type="textarea" placeholder={props.movie.caption ? props.movie.caption : "Add Your Caption Here..."} />
+                        <Form.Control ref={commentRef} type="textarea" placeholder={props.movie.isCaption ? props.movie.caption : "Add Your Caption Here..."} />
                     </Form.Group>
                     <Button className="addBtn" variant="primary" type="submit" onClick={handleCaption}  >
                         Add a Caption

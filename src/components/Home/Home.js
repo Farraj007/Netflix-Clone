@@ -11,7 +11,7 @@ function Home(props) {
                 {props.movies && (
                     <Container fluid className="main-container">
                         <Row className="flex-row">
-                            <MovieList movies={props.movies} addcomment={props.addComment} />
+                            <MovieList movies={props.movies} addComment={props.addComment} />
                         </Row>
                     </Container>
                 )}

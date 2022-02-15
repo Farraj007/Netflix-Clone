@@ -17,7 +17,7 @@ function MovieList(props) {
           })
            }
         </CardGroup>
-      {showModal && <ModalMovie show={showModal} movie={movie} 
+      {showModal && <ModalMovie show={showModal} movie={props.movies} 
       handleColse={() => { setShowModal(false) }} 
       addComment={props.addComment} />}
 

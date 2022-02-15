@@ -1,6 +1,7 @@
 import React from "react";
 import { Card,Button } from "react-bootstrap";
 
+
 function Movie(props) {
   return (
     <>
@@ -13,7 +14,7 @@ function Movie(props) {
               {props.movie.overview}
             </Card.Text>
             <Card.Text>
-              {props.movie.caption ? props.movie.caption : "No Caption Added"}
+              {props.movie.isCaption ? props.movie.caption : "No Caption Added"}
             </Card.Text>
             <Button
               variant="primary"
@@ -24,6 +25,7 @@ function Movie(props) {
             >
               Show Modal
             </Button>
+            <Button variant="primary"> Add to Fav</Button>
           </Card.Body>
         </Card>
       </div>
@@ -32,3 +34,4 @@ function Movie(props) {
 }
 
 export default Movie;
+// {`https://www.themoviedb.org/t/p/w600_and_h900_bestv2${props.movie.poster_path}`}
