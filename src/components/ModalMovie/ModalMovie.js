@@ -1,4 +1,4 @@
-import react,{ useRef } from 'react';
+import React,{ useRef } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap/';
 
 function ModalMovie(props) {
@@ -12,6 +12,7 @@ function ModalMovie(props) {
         props.addComment(newData, props.movie.id);
         console.log(props.movie)
     }
+    console.log(props.movie)
 
     return (
         <>
@@ -21,7 +22,7 @@ function ModalMovie(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <img width='100%' src= {props.movie.poster_path} alt={props.movie.title} />
-                    {/* <p>{props.movie.isCaption ? props.movie.caption: "No Text Provided"}</p> */}
+                    <p>{props.movie.isCaption ? props.movie.caption: "No Text Provided"}</p>
                     {/* <p>{props.movie.caption}</p> */}
                 </Modal.Body>
                 <Modal.Footer>
