@@ -10,10 +10,32 @@ function ModalMovie(props) {
         const userCaption = commentRef.current.value;
         ;
         const newData = { ...props.movie, userCaption };
-        props.addComment(newData, props.movie.id);
-        console.log(props.movie)
+        props.addComment(newData, props.movie.id);  
     }
-    console.log(props.movie)
+    async function addToFavorite(movie){
+        try{
+            const res = await fetch(`${process.env.REACT_APP_SERVER}/addmovie`, {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title : movie.title,
+                    poster_path : `https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`,
+                    overview : movie.caption,
+                })
+            })
+            const data = await res.json();
+
+
+        } catch (error) {
+            console.log("error", error);
+        }
+    }
+
+
+
 
     return (
         <>
@@ -34,7 +56,7 @@ function ModalMovie(props) {
                     <Button className="addBtn" variant="primary" type="submit" onClick={handleCaption}  >
                         Add a Caption
                     </Button>
-                    <Button variant="primary"> Add to Fav</Button>
+                    <Button variant="primary" onClick={()=>{ addToFavorite(props.movie)}}> Add to Fav</Button>
                     <Button variant="secondary" onClick={props.handleColse}>
                         Close
                     </Button>
