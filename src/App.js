@@ -1,17 +1,17 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import React, { useEffect, useState } from "react";
-import Home from "./components/Home/Home.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navibar from './components/Navbar/Navbar.js'
+import React, { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/Home/Home.js";
+import Navibar from './components/Navbar/Navbar.js';
+import FavList from './components/FavList/FavList.js';
+
 function App() {
   const [movies, setMovies] = useState();
 
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        `https://movies-library-barham-farraj.herokuapp.com/trending`
-      );
+      const response = await fetch(`${process.env.REACT_APP_SERVER}/trending`);
 
       const data = await response.json();
       let capData = []
@@ -21,7 +21,6 @@ function App() {
         capData.push(c)
         
       }
-   console.log(capData[0])
       setMovies(capData);
       
     } catch (error) {
@@ -39,10 +38,32 @@ function App() {
           })
       setMovies(addComment);
     };
-
     useEffect(() => {
       fetchData();
     }, []);
+    const [favMovies, setFavMovies] = useState();
+
+    const fetchFavData = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_SERVER}/getmovies`);
+  
+        const data = await response.json();
+        // let capData = []
+        // for (let c of data) {
+        //   c["caption"] ="No Caption"
+        //   c["isCaption"] =false
+        //   capData.push(c)
+          
+        // }
+        setFavMovies(data);
+        
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+      useEffect(() => {
+        fetchFavData();
+      }, []);
     const [expand,setExpand]=useState(false)
   function handleExpand(){
     setExpand(!expand)
@@ -55,16 +76,10 @@ function App() {
     </div>
     <div id="main">
       <Routes>
-        <Route
-          path="/"
-          element={<Home movies={movies} addComment={addComment} expand={handleExpand} isExpanded={expand}/>}
-        />
-        {/* <Route path="/trending" element={<TrendingList />} /> */}
+      <Route path="/"element={<Home movies={movies} addComment={addComment} expand={handleExpand} isExpanded={expand}/>}/>
+      <Route path="/favorites" element={<FavList favMovies={favMovies} />}/>
       </Routes>
       </div>
-      {/* <div id= "Footer">
-     <Footer/>
-    </div> */}
     </>
   );
 }
