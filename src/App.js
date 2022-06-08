@@ -3,8 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home.js";
-import Navibar from './components/Navbar/Navbar.js';
 import FavList from './components/FavList/FavList.js';
+import Navibar from './components/FavList/FavList.js';
 
 function App() {
   const [movies, setMovies] = useState();
